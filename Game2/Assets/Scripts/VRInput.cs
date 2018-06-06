@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+
 public class VRInput : MonoBehaviour {
     private Camera fpsCam;
     public float sightRange = 100f;

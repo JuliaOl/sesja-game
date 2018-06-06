@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.XR;
 using System.Collections;
+using UnityEngine.UI;
+
 
 public class RaycastShoot : MonoBehaviour
 {
@@ -10,12 +11,14 @@ public class RaycastShoot : MonoBehaviour
     public float weaponRange = 50f;                                     // Distance in Unity units over which the player can fire
     public float hitForce = 100f;                                       // Amount of force which will be added to objects with a rigidbody shot by the player
     public Transform gunEnd;                                            // Holds a reference to the gun end object, marking the muzzle location of the gun
+    public Text countText;
 
     private Camera fpsCam;                                              // Holds a reference to the first person camera
     private WaitForSeconds shotDuration = new WaitForSeconds(0.07f);    // WaitForSeconds object used by our ShotEffect coroutine, determines time laser line will remain visible
     private AudioSource gunAudio;                                       // Reference to the audio source which will play our shooting sound effect
     private LineRenderer laserLine;                                     // Reference to the LineRenderer component which will display our laserline
     private float nextFire;
+    private int count;
 
     // Float to store the time the player will be allowed to fire again, after firing
 
@@ -30,6 +33,10 @@ public class RaycastShoot : MonoBehaviour
 
         // Get and store a reference to our Camera by searching this GameObject and its parents
         fpsCam = GetComponentInParent<Camera>();
+
+        count = 0;
+        countText.text = "Punkty: " + count.ToString();
+        
     }
 
 
@@ -68,6 +75,8 @@ public class RaycastShoot : MonoBehaviour
                 {
                     // Call the damage function of that script, passing in our gunDamage variable
                     health.Damage(gunDamage);
+                    count = count + 1;
+                    countText.text = "Punkty: " + count.ToString();
                 }
 
                 // Check if the object we hit has a rigidbody attached
