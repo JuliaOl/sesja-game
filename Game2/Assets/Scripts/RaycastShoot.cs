@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.XR;
 using System.Collections;
 
 public class RaycastShoot : MonoBehaviour
@@ -14,7 +15,9 @@ public class RaycastShoot : MonoBehaviour
     private WaitForSeconds shotDuration = new WaitForSeconds(0.07f);    // WaitForSeconds object used by our ShotEffect coroutine, determines time laser line will remain visible
     private AudioSource gunAudio;                                       // Reference to the audio source which will play our shooting sound effect
     private LineRenderer laserLine;                                     // Reference to the LineRenderer component which will display our laserline
-    private float nextFire;                                             // Float to store the time the player will be allowed to fire again, after firing
+    private float nextFire;
+
+    // Float to store the time the player will be allowed to fire again, after firing
 
 
     void Start()
@@ -33,7 +36,7 @@ public class RaycastShoot : MonoBehaviour
     void Update()
     {
         // Check if the player has pressed the fire button and if enough time has elapsed since they last fired
-
+        
         if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
         {
             // Update the time when our player can fire next
